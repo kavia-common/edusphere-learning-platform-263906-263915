@@ -27,6 +27,35 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Integration Quickstart (Frontend ↔ Backend ↔ Supabase)
+
+1) Copy environment example and fill in values
+- cp .env.example .env
+- Required:
+  - REACT_APP_SUPABASE_URL (from Supabase → Project Settings → API)
+  - REACT_APP_SUPABASE_KEY (Anon public key)
+- Defaults provided for local dev:
+  - REACT_APP_BACKEND_URL=http://localhost:3001
+  - REACT_APP_WS_URL=ws://localhost:3001
+  - REACT_APP_FRONTEND_URL=http://localhost:3000
+
+2) Start services
+- Backend should listen on http://localhost:3001 with CORS allowing http://localhost:3000
+- Frontend: npm start (uses REACT_APP_PORT=3000 by default)
+
+3) Authentication & bearer token
+- The axios client at src/lib/apiClient.js automatically attaches the Supabase access_token as Authorization: Bearer <token> on every request based on the current session.
+
+4) AI & sample endpoints
+- Example page src/pages/ai/AiAssistant.jsx calls POST /api/ai/assist on the backend. Ensure your backend exposes this route (per backend OpenAPI under /ai/assist).
+
+5) Realtime
+- Supabase Realtime is used for chat via src/hooks/useRealtimeChannel.js
+- For future backend WebSocket connections, use REACT_APP_WS_URL (default ws://localhost:3001).
+
+6) Email redirects
+- Sign-up and reset flows use REACT_APP_FRONTEND_URL to build emailRedirectTo/redirectTo links. Make sure it matches your deployed frontend URL in production.
+
 ## Customization
 
 ### Colors
