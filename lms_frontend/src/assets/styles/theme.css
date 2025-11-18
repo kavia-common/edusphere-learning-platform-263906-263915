@@ -1,0 +1,86 @@
+/* Ocean Professional Theme Variables */
+:root {
+  --op-primary: #2563EB;
+  --op-secondary: #F59E0B;
+  --op-error: #EF4444;
+  --op-surface: #ffffff;
+  --op-background: #f9fafb;
+  --op-text: #111827;
+
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 24px rgba(2, 6, 23, 0.08);
+}
+
+body {
+  background: var(--op-background);
+  color: var(--op-text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  background: var(--op-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(2, 6, 23, 0.06);
+}
+
+.btn {
+  background: var(--op-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .2s ease, opacity .2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn.secondary {
+  background: var(--op-secondary);
+  color: #111827;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--op-primary);
+  border: 1px solid rgba(2, 6, 23, 0.08);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: .95;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(2, 6, 23, 0.12);
+  background: #fff;
+  color: var(--op-text);
+}
+
+.topbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, var(--op-gradient-from), var(--op-gradient-to));
+  backdrop-filter: blur(6px);
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(2,6,23,0.06);
+}
+
+.sidebar {
+  min-width: 240px;
+  max-width: 260px;
+  background: #ffffff;
+  border-right: 1px solid rgba(2,6,23,0.08);
+}

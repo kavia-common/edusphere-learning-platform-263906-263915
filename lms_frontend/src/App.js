@@ -1,49 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
+import "./assets/styles/theme.css";
+import AppRouter from "./routes/AppRouter";
+import { applyTheme } from "./utils/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { initSession, registerAuthListener } from "./store/authSlice";
 
-// PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  const dispatch = useDispatch();
+  const { theme } = useSelector((s) => s.ui);
 
-  // Effect to apply theme to document element
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    applyTheme();
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+  useEffect(() => {
+    // initialize auth session and register listener
+    dispatch(initSession());
+    registerAuthListener(dispatch);
+  }, [dispatch]);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default App;
